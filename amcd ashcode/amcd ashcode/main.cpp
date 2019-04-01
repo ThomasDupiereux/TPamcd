@@ -73,7 +73,7 @@ int main() {
 	//cout << lesVoituresFinies.size(); // check
 	*/
 	int comp = 0;
-	while (comp <100 && lesCourses.size()>0) {
+	while (comp < F && lesCourses.size()>0) {
 		lesVoitures[comp].SelectCourse(lesCourses);
 		lesVoitures[comp].affiche();
 		if (!lesVoitures[comp].getStatut())
