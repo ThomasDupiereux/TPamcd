@@ -38,7 +38,7 @@ void Voiture::SelectCourse(vector<Course> &lesCourses)
 		ti = max(ta, lesCourses[i].s);
 
 		// test possibilité
-		if ((ti < t || t==0) && (ti + dist(lesCourses[i].a, lesCourses[i].b, lesCourses[i].x, lesCourses[i].y) <= lesCourses[i].f)) {
+		if ((ti < t || t == 0) && (ti + dist(lesCourses[i].a, lesCourses[i].b, lesCourses[i].x, lesCourses[i].y) <= lesCourses[i].f)) {
 			t = ti;
 			leChoix = i;
 		}
@@ -68,7 +68,18 @@ void Voiture::affiche()
 {
 	cout << lesCourses.size() << " ";
 	for (int i = 0; i < (int)lesCourses.size(); i++) {
-		cout << lesCourses[i]<< " ";
+		cout << lesCourses[i] << " ";
 	}
 	cout << endl;
+}
+
+void Voiture::affiche2()
+{
+	cout << this->id << " " << this->tour << endl;
+}
+
+
+bool Voiture::operator<(Voiture v)
+{
+	return this->tour < v.tour;
 }

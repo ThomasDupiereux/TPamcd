@@ -1,9 +1,9 @@
 #include <iostream>
 #include <fstream>
-#include "Course.h"
-#include "Voiture.h"
 #include <vector>
 #include <list> 
+#include "Voiture.h"
+#include "Course.h"
 #include <algorithm>    // std::sort
 using namespace std;
 
@@ -13,11 +13,9 @@ bool Compare(Voiture A, Voiture B) {
 
 int main() {
 	int R, C, F, N, B, T;
-	vector <Course> lesCourses;
+	vector <Course> listCourses;
 
-
-
-	ifstream fichier("b_should_be_easy.in");
+	ifstream fichier("e_high_bonus.in");
 	if (fichier) {
 		int a, b, c, d, e, f;
 		int i = 0;
@@ -27,7 +25,7 @@ int main() {
 		fichier >> N;
 		fichier >> B;
 		fichier >> T;
-		while (/*!fichier.eof()*/ i<N) {
+		while (i < N) {
 			fichier >> a;
 			fichier >> b;
 			fichier >> c;
@@ -36,7 +34,7 @@ int main() {
 			fichier >> f;
 			Course course(a, b, c, d, e, f, i);
 			i++;
-			lesCourses.push_back(course);
+			listCourses.push_back(course);
 		}
 		fichier.close();
 
@@ -45,46 +43,46 @@ int main() {
 		cout << "Impossible ouvrir fichier\n";
 
 	}
-	//lesCourses.erase(lesCourses.end());
+
 
 	vector<Voiture> lesVoitures;
 	vector<Voiture> lesVoituresFinies;
 	for (int i = 0; i < F; i++) {
-		Voiture laVoiture(i + 1);
+		Voiture laVoiture(i+1);
 		lesVoitures.push_back(laVoiture);
 	}
-	//cout << lesVoitures.size(); // check
-	int test = 0;
-	/*while ((int)lesVoitures.size() > 0 || (int)lesCourses.size() > 0) {
-		//list<Voiture>::iterator it;
 
-		cout << (int)lesCourses.size() << endl;
-		if((int)lesCourses.size()>0)
-			lesVoitures[0].SelectCourse(lesCourses);
-		if (lesVoitures[0].getStatut() == false) {
-		//if (test == 2) {
-			lesVoituresFinies.push_back(lesVoitures[0]);
-			lesVoitures.erase(lesVoitures.begin());
-		}
-		//cout << test;
-		}
-		sort(lesVoitures.begin(), lesVoitures.end(), Compare);
-		//lesVoitures.sort();
-	//cout << lesVoituresFinies.size(); // check
-	*/
-	int comp = 0;
-	while (comp <100 && lesCourses.size()>0) {
-		lesVoitures[comp].SelectCourse(lesCourses);
-		lesVoitures[comp].affiche();
-		if (!lesVoitures[comp].getStatut())
-			comp++;
-	}
-	cout << "============================" << endl;
-	for(int i = 0; i < (int)lesVoitures.size(); i++)
+	for (int i = 0; i < (int)lesVoitures.size(); i++)
 	{
 		lesVoitures[i].affiche();
 	}
-
+	cout << "============================" << endl;
+	//int comp = 0;
+	//while (comp < F && listCourses.size()>0) {
+	while (lesVoitures.size()>0 && listCourses.size()>0){
+		lesVoitures[0].SelectCourse(listCourses);
+		sort(lesVoitures.begin(), lesVoitures.end());
+		//lesVoitures[0].affiche();
+		
+		/*for (int i = 0; i < (int)lesVoitures.size(); i++)
+		{
+			lesVoitures[i].affiche2();
+		}
+		cout << "=============" << endl;
+		*/
+		if (!lesVoitures[0].getStatut())
+		{
+			//comp++;
+			lesVoituresFinies.push_back(lesVoitures[0]);
+			lesVoitures.erase(lesVoitures.begin());
+		}
+	}
+	cout << "============================" << endl;
+	for (int i = 0; i < (int)lesVoituresFinies.size(); i++)
+	{
+		lesVoituresFinies[i].affiche();
+	}
+	
 	system("pause");
 	return 0;
 }
